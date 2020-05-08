@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:wininbahrain/providers/percentage.dart';
 import 'package:provider/provider.dart';
 
-
 class PercentIndicator extends StatelessWidget {
   final double percent;
   final String label;
