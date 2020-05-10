@@ -5,7 +5,8 @@ import 'package:provider/provider.dart';
 class PercentIndicator extends StatelessWidget {
   final double percent;
   final String label;
-  PercentIndicator({@required this.percent,this.label = ""});
+  final Color primaryColor;
+  PercentIndicator({@required this.percent,this.label = "",this.primaryColor = Colors.red});
   final GlobalKey fullWidth = GlobalKey();
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class PercentIndicator extends StatelessWidget {
                     left: percent * percentProvider.fullWidth / 100 - 11,
                     child: Text(
                       "${percent.toInt()}%",
-                      style: percentProvider.percentageStyle,
+                      style: TextStyle(fontSize: 9,fontWeight: FontWeight.bold,color: primaryColor),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -73,7 +74,7 @@ class PercentIndicator extends StatelessWidget {
                     Radius.circular(3),
                   ),
                   gradient: LinearGradient(
-                      colors: [Colors.black54, Color(0xffff0000)],
+                      colors: [Colors.black54, primaryColor],
                       begin: Alignment.centerLeft,
                       end: Alignment.centerRight),
                 ),

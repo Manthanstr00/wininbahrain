@@ -6,20 +6,28 @@ final TextStyle primaryText =
     TextStyle(fontSize: 18, color: Colors.black87, fontWeight: FontWeight.bold);
 
 final TextStyle h6 =
-    TextStyle(fontSize: 25, color: Colors.black87, fontWeight: FontWeight.bold);
+    TextStyle(fontSize: 25, color: Colors.black54, fontWeight: FontWeight.bold);
 final TextStyle h5 =
-    TextStyle(fontSize: 23, color: Colors.black87, fontWeight: FontWeight.bold);
+    TextStyle(fontSize: 23, color: Colors.black54, fontWeight: FontWeight.bold);
 final TextStyle h4 =
-    TextStyle(fontSize: 21, color: Colors.black87, fontWeight: FontWeight.bold);
+    TextStyle(fontSize: 21, color: Colors.black54, fontWeight: FontWeight.bold);
 final TextStyle h3 =
-    TextStyle(fontSize: 19, color: Colors.black87, fontWeight: FontWeight.bold);
+    TextStyle(fontSize: 19, color: Colors.black54, fontWeight: FontWeight.bold);
 final TextStyle h2 =
-    TextStyle(fontSize: 17, color: Colors.black87, fontWeight: FontWeight.bold);
+    TextStyle(fontSize: 17, color: Colors.black54, fontWeight: FontWeight.bold);
 final TextStyle h1 =
-    TextStyle(fontSize: 14, color: Colors.black87, fontWeight: FontWeight.bold);
+    TextStyle(fontSize: 14, color: Colors.black54, fontWeight: FontWeight.bold);
 
 final TextStyle countdownText =
 TextStyle(fontSize: 14, color: Colors.red[300], fontWeight: FontWeight.bold);
+
+
+final TextStyle cardHeading = TextStyle(fontSize: 14,fontWeight: FontWeight.bold,color: Colors.black54);
+final TextStyle cardSubTitle = TextStyle(fontSize: 12,fontWeight: FontWeight.bold,color: Colors.black45);
+
+
+final counterText = TextStyle(fontSize: 11, color: Colors.black87);
+final counterTextHighlight = TextStyle(fontSize: 11, color: Colors.red[400]);
 
 
 final TextStyle currencyText =
@@ -27,6 +35,7 @@ TextStyle(fontSize: 14, color: Colors.red[300], fontWeight: FontWeight.bold);
 
 final TextStyle pointerText =
     TextStyle(fontSize: 11, color: Colors.black, fontWeight: FontWeight.bold);
+
 
 screenWidth(BuildContext context) {
   return MediaQuery.of(context).size.width;
