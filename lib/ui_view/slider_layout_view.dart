@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:wininbahrain/Constant/Constant.dart';
 import 'package:wininbahrain/model/slider.dart';
 import 'package:wininbahrain/screens/LoginPage.dart';
-import 'package:wininbahrain/widgets/slide_dots.dart';
 import 'package:wininbahrain/widgets/slide_items/slide_item.dart';
 
 class SliderLayoutView extends StatefulWidget {
@@ -101,20 +100,6 @@ class _SliderLayoutViewState extends State<SliderLayoutView> {
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                    Container(
-                      alignment: AlignmentDirectional.bottomCenter,
-                      margin: EdgeInsets.only(bottom: 20.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          for (int i = 0; i < sliderArrayList.length; i++)
-                            if (i == _currentPage)
-                              SlideDots(true)
-                            else
-                              SlideDots(false)
-                        ],
                       ),
                     ),
                   ],

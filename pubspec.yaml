@@ -41,6 +41,9 @@ dependencies:
   countdown_flutter:
   flutter_spinkit:
   provider:
+  flutter_custom_clippers:
+  image:
+  intl:
 
 
 dev_dependencies:
