@@ -14,4 +14,6 @@ class PercentProvider extends ChangeNotifier{
       notifyListeners();
   }
 
+  
+
 }

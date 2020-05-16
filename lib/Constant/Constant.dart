@@ -1,15 +1,12 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:wininbahrain/model/contests.dart';
 import 'package:wininbahrain/themes/homepage_light_color.dart';
 import 'package:wininbahrain/widgets/percent_indicator.dart';
 import 'package:flutter/widgets.dart';
-
-
-
 
 final TextStyle secondaryText = TextStyle(fontSize: 12, color: Colors.red[200]);
 final TextStyle primaryText =
@@ -78,7 +75,7 @@ class Constants {
 }
 
 final backGradient = LinearGradient(
-    colors: [Color(0xaa2a4b8f), Color(0xaa3a6cd3)],
+    colors: [Colors.red[300], Colors.red[900]],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter);
 
@@ -267,6 +264,7 @@ Widget circularContainer(double height, Color color,
 
 Widget header(BuildContext context,
     {String title = "",
+    String userAvatar = "",
     bool popButton = false,
     List<Widget> action = const [],
     LinearGradient gradient = const LinearGradient(
@@ -278,11 +276,11 @@ Widget header(BuildContext context,
     padding: const EdgeInsets.only(bottom: 5),
     child: Material(
       borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
+          bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
       elevation: 3,
       child: ClipRRect(
         borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
+            bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
         child: Container(
             height: 85,
             width: width,
@@ -352,7 +350,21 @@ Widget header(BuildContext context,
                             ),
                             Container(
                               child: Row(
-                                children: action,
+                                children: [
+                                  Container(
+                                    height: 40,
+                                    width: 40,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: ClipOval(
+                                      child: Image.network(
+                                        "https://pixelmator-pro.s3.amazonaws.com/community/avatar_empty@2x.png",
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  )
+                                ],
                               ),
                             )
                           ],
@@ -457,13 +469,22 @@ class CustomScaffold extends StatelessWidget {
   final bool headerVisible;
   final List<Widget> action;
   final LinearGradient gradient;
+  final LinearGradient backgroundGradient;
+  final Widget floatingActionButton;
+
+  static const defaultBackGradient = LinearGradient(
+      colors: [Colors.white, Colors.white],
+      begin: Alignment.centerLeft,
+      end: Alignment.centerRight);
 
   CustomScaffold(
       {this.body,
+      this.floatingActionButton,
+      this.backgroundGradient = defaultBackGradient,
       this.gradient = const LinearGradient(
-          colors: [Color(0xcc940000), Color(0xccB71C1C)],
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight),
+          colors: [Color(0xffff3a50), Color(0xffa50013)],
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft),
       this.action = const [],
       this.appBarTitle,
       this.popButton = false,
@@ -473,8 +494,14 @@ class CustomScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: floatingActionButton,
       backgroundColor: backgroundColor,
       body: Container(
+        decoration: BoxDecoration(
+          gradient: backgroundGradient == defaultBackGradient
+              ? defaultBackGradient
+              : backgroundGradient,
+        ),
         height: screenHeight(context),
         width: screenWidth(context),
         child: Stack(children: <Widget>[
@@ -489,7 +516,7 @@ class CustomScaffold extends StatelessWidget {
                   : Padding(
                       padding: const EdgeInsets.only(top: 50),
                       child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: body,
                       ),
                     )),
@@ -552,8 +579,7 @@ class CustomLabel extends StatelessWidget {
             Text(
               label,
               style: TextStyle(
-                  color: LightColor.titleTextColor,
-                  fontWeight: FontWeight.bold),
+                  color: Colors.red[900], fontWeight: FontWeight.bold),
               textAlign: align,
             ),
           ],
@@ -733,14 +759,9 @@ showCharityModal(BuildContext context) {
 }
 
 Widget productWidget(BuildContext context,
-    {String backgroundImage,
-    String name,
-    String price,
-    int totalTickets,
-    int soldTickets,
-    Function tap}) {
+    {ContestsModel contest, Function tap}) {
   final width = MediaQuery.of(context).size.width;
-  final soldPercent = soldTickets / totalTickets * 100;
+  final soldPercent = contest.soldTickets / contest.totalTickets * 100;
   return NotificationListener<ScrollNotification>(
     onNotification: (val) {
       print('asdasdasd');
@@ -766,7 +787,7 @@ Widget productWidget(BuildContext context,
                       ),
                       width: width,
                       child: Image.network(
-                        backgroundImage,
+                        contest.displayImage,
                         fit: BoxFit.cover,
                       ),
                       height: 200,
@@ -785,7 +806,7 @@ Widget productWidget(BuildContext context,
 //                                ),
                         ),
                         child: Text(
-                          '$price BD',
+                          '${contest.price} BD',
                           style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
@@ -804,25 +825,27 @@ Widget productWidget(BuildContext context,
                 Container(
                     width: 50 * width / 100,
                     child: Text(
-                      name,
+                      contest.contestName,
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     )),
-                GestureDetector(
-                  onTap: () {
-                    showCharityModal(context);
-                  },
-                  child: Container(
-                    child: SizedBox(
-                      height: 25,
-                      width: 25,
-                      child: SvgPicture.asset(
-                        "assets/svgIcons/organs.svg",
-                        color: Colors.black38,
-                      ),
-                    ),
-                  ),
-                ),
+                contest.charity == true
+                    ? GestureDetector(
+                        onTap: () {
+                          showCharityModal(context);
+                        },
+                        child: Container(
+                          child: SizedBox(
+                            height: 25,
+                            width: 25,
+                            child: SvgPicture.asset(
+                              "assets/svgIcons/organs.svg",
+                              color: Colors.black38,
+                            ),
+                          ),
+                        ),
+                      )
+                    : SizedBox(),
                 Material(
                   color: Colors.transparent,
                   borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -992,7 +1015,11 @@ String daynameMonthDayYear(DateTime date) {
 }
 
 Widget inputField(
-    {TextEditingController controller, String labelText, String hintText,bool readOnly = false, int maxLines = 1}) {
+    {TextEditingController controller,
+    String labelText,
+    String hintText,
+    bool readOnly = false,
+    int maxLines = 1}) {
   return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       child: TextFormField(
@@ -1000,7 +1027,8 @@ Widget inputField(
         maxLines: maxLines,
         controller: controller,
         decoration: InputDecoration(
-            contentPadding: EdgeInsets.only(left: 20, right: 10,top: 10,bottom: 0),
+            contentPadding:
+                EdgeInsets.only(left: 20, right: 10, top: 10, bottom: 0),
             labelText: labelText,
             hintText: hintText,
             hintMaxLines: 1,

@@ -1,3 +1,8 @@
+import 'package:wininbahrain/model/favouriteContests.dart';
+import 'package:flutter/material.dart';
+
+
+
 class EndedContestsModel {
     final String contestName;
     final int price;
@@ -5,4 +10,7 @@ class EndedContestsModel {
     
     EndedContestsModel({this.price, this.displayImage,this.contestName});
 }
+
+
+
 

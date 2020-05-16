@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simple_animations/simple_animations.dart';
 import 'package:wininbahrain/providers/percentage.dart';
 import 'package:provider/provider.dart';
 
@@ -7,9 +8,18 @@ class PercentIndicator extends StatelessWidget {
   final String label;
   final Color primaryColor;
   PercentIndicator({@required this.percent,this.label = "",this.primaryColor = Colors.red});
+
+  
   final GlobalKey fullWidth = GlobalKey();
   @override
   Widget build(BuildContext context) {
+    final tween = MultiTrackTween([
+      Track("color1").add(Duration(seconds: 3),
+          ColorTween(begin: Color(0xff000000), end: primaryColor)),
+      Track("color2").add(Duration(seconds: 3),
+          ColorTween(begin: primaryColor, end: Colors.black))
+    ]);
+  
     final PercentProvider percentProvider = Provider.of<PercentProvider>(context);
     WidgetsBinding.instance.addPostFrameCallback((_) => percentProvider.getWidthOfContainer(fullWidth));
     return Padding(
@@ -67,19 +77,26 @@ class PercentIndicator extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(2.0),
-            child: AnimatedContainer(
-                duration: Duration(milliseconds: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(3),
-                  ),
-                  gradient: LinearGradient(
-                      colors: [Colors.black54, primaryColor],
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight),
-                ),
-                width: percent * percentProvider.fullWidth / 100,
-                height: 11),
+            child: ControlledAnimation(
+              playback: Playback.MIRROR,
+              tween: tween,
+              duration: tween.duration,
+              builder: (context, animation){
+                return AnimatedContainer(
+                    duration: Duration(milliseconds: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(3),
+                      ),
+                      gradient: LinearGradient(
+                          colors: [animation["color1"], animation["color2"]],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight),
+                    ),
+                    width: percent * percentProvider.fullWidth / 100,
+                    height: 11);
+              },
+            ),
           ),
         ],
       ),

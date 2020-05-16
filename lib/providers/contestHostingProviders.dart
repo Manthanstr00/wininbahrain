@@ -4,15 +4,15 @@ import 'package:image_picker/image_picker.dart';
 import 'package:wininbahrain/Constant/Constant.dart';
 
 class ContestHosting extends ChangeNotifier {
-  final contestTitle = TextEditingController(text: "Multiple Prize draw");
-  final contestDescription = TextEditingController(text: "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software");
+  final contestTitle = TextEditingController();
+  final contestDescription = TextEditingController();
   File imageOne;
   File imageTwo;
   File imageThree;
   File promotionalPhoto;
   DateTime endTime;
-  final prizeTitle = TextEditingController(text: "Apple one");
-  final prizeCollection = TextEditingController(text: "Goa");
+  final prizeTitle = TextEditingController();
+  final prizeCollection = TextEditingController();
 
   int selectedQuestionId;
   String selectedQuestion;
@@ -53,8 +53,8 @@ class ContestHosting extends ChangeNotifier {
 
   //DropDown
   String selectedCurrency = "BD";
-  String selectedItem = "Delivery not included";
-  int selectedNumberOfTickets = 100;
+  String selectedItem;
+  int selectedNumberOfTickets;
   String selectedPricePerTicket;
 
   List<Delivery> delivery = <Delivery>[
@@ -69,7 +69,7 @@ class ContestHosting extends ChangeNotifier {
   
   
   bool charity = false;
-  double charityPercentage = 1.0;
+  double charityPercentage = 0.0;
 
   onChangeCharitySlider(value) {
     charityPercentage = value;
