@@ -69,22 +69,10 @@ flutter:
     - assets/svgIcons/
 
   fonts:
-    - family: Poppins
+    - family: SweetPurple
       fonts:
-        - asset: assets/fonts/Poppins-Regular.ttf
-          weight: 500
-        - asset: assets/fonts/Poppins-SemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/Poppins-Bold.ttf
-          weight: 700
-    - family: OpenSans
-      fonts:
-        - asset: assets/fonts/OpenSans-Regular.ttf
-          weight: 500
-        - asset: assets/fonts/OpenSans-SemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/OpenSans-Bold.ttf
-          weight: 700
+        - asset: assets/fonts/sweet-purple.regular.ttf
+
 
   # To add assets to your application, add an assets section, like this:
 

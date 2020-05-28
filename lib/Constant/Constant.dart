@@ -54,7 +54,7 @@ Widget hr(BuildContext context) {
   return Container(
       width: MediaQuery.of(context).size.width,
       height: 1,
-      color: Color(0x55B9F6CA));
+      color: Colors.red[100]);
 }
 
 String HOME_SCREEN = '/HomeScreen',
@@ -88,11 +88,11 @@ final shadow = [
   )
 ];
 
-boxShadow({double shadowStrength = 1, Offset offset = const Offset(0.0, 0.0)}) {
+boxShadow({double shadowStrength = 1, Offset offset = const Offset(0.0, 0.0),Color shadowColor = Colors.black12}) {
   return BoxShadow(
     blurRadius: shadowStrength,
     spreadRadius: shadowStrength,
-    color: Colors.black12,
+    color: shadowColor,
     offset: offset,
   );
 }
@@ -303,7 +303,7 @@ Widget header(BuildContext context,
                     child: circularContainer(width * .7, Colors.transparent,
                         borderColor: Colors.white38)),
                 Positioned(
-                    top: 35,
+                    top: 30,
                     left: 0,
                     child: Container(
                         width: width,
@@ -355,11 +355,12 @@ Widget header(BuildContext context,
                                     height: 40,
                                     width: 40,
                                     decoration: BoxDecoration(
+                                      boxShadow: [boxShadow(shadowStrength: 3)],
                                       shape: BoxShape.circle,
                                     ),
                                     child: ClipOval(
                                       child: Image.network(
-                                        "https://pixelmator-pro.s3.amazonaws.com/community/avatar_empty@2x.png",
+                                        "https://mazanan.com/wp-content/uploads/2019/07/Saudi-Arabia.jpg",
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -471,6 +472,7 @@ class CustomScaffold extends StatelessWidget {
   final LinearGradient gradient;
   final LinearGradient backgroundGradient;
   final Widget floatingActionButton;
+  final EdgeInsets headerOnTopPadding;
 
   static const defaultBackGradient = LinearGradient(
       colors: [Colors.white, Colors.white],
@@ -479,6 +481,7 @@ class CustomScaffold extends StatelessWidget {
 
   CustomScaffold(
       {this.body,
+      this.headerOnTopPadding = const EdgeInsets.only(top: 50),
       this.floatingActionButton,
       this.backgroundGradient = defaultBackGradient,
       this.gradient = const LinearGradient(
@@ -514,7 +517,7 @@ class CustomScaffold extends StatelessWidget {
                       ),
                     )
                   : Padding(
-                      padding: const EdgeInsets.only(top: 50),
+                      padding: headerOnTopPadding,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: body,
@@ -579,7 +582,8 @@ class CustomLabel extends StatelessWidget {
             Text(
               label,
               style: TextStyle(
-                  color: Colors.red[900], fontWeight: FontWeight.bold),
+                fontSize: 12,
+                  color: Colors.red[300], fontWeight: FontWeight.bold),
               textAlign: align,
             ),
           ],
@@ -588,6 +592,7 @@ class CustomLabel extends StatelessWidget {
     );
   }
 }
+
 
 class NavOutlineButton extends StatelessWidget {
   final Function onTapped;
@@ -929,6 +934,7 @@ class ModalTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 2),
       child: Material(
+        color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(10)),
         child: MaterialButton(
             minWidth: MediaQuery.of(context).size.width,
@@ -1028,7 +1034,7 @@ Widget inputField(
         controller: controller,
         decoration: InputDecoration(
             contentPadding:
-                EdgeInsets.only(left: 20, right: 10, top: 10, bottom: 0),
+                EdgeInsets.only(left: 20, right: 10, top: 10, bottom: 5),
             labelText: labelText,
             hintText: hintText,
             hintMaxLines: 1,
@@ -1113,7 +1119,7 @@ Widget textButton(
 Widget dropDown(BuildContext context,
     {String hint, List items, Function onChange, String value, double width}) {
   return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+    padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 8),
     child: Container(
       width: width == null ? MediaQuery.of(context).size.width : width,
       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),

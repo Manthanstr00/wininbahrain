@@ -1,5 +1,3 @@
 import 'package:flutter/material.dart';
 
-class HistoryProvider extends ChangeNotifier{
-
-}
+class HistoryProvider extends ChangeNotifier {}

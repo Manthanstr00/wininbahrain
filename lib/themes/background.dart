@@ -11,13 +11,15 @@ class Background extends StatelessWidget {
           new Stack(
             alignment: Alignment.bottomCenter,
             children: <Widget>[
-              Image.asset('assets/collaboration.png', width: MediaQuery.of(context).size.width/1.5,),
+              Image.asset(
+                'assets/collaboration.png',
+                width: MediaQuery.of(context).size.width / 1.5,
+              ),
               WavyHeader(),
             ],
           ),
           Expanded(
-            child: Container(
-            ),
+            child: Container(),
           ),
           Stack(
             alignment: Alignment.bottomLeft,

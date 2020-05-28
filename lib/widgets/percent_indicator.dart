@@ -7,9 +7,12 @@ class PercentIndicator extends StatelessWidget {
   final double percent;
   final String label;
   final Color primaryColor;
-  PercentIndicator({@required this.percent,this.label = "",this.primaryColor = Colors.red});
-
   
+  PercentIndicator(
+      {@required this.percent,
+      this.label = "",
+      this.primaryColor = Colors.red});
+
   final GlobalKey fullWidth = GlobalKey();
   @override
   Widget build(BuildContext context) {
@@ -19,9 +22,11 @@ class PercentIndicator extends StatelessWidget {
       Track("color2").add(Duration(seconds: 3),
           ColorTween(begin: primaryColor, end: Colors.black))
     ]);
-  
-    final PercentProvider percentProvider = Provider.of<PercentProvider>(context);
-    WidgetsBinding.instance.addPostFrameCallback((_) => percentProvider.getWidthOfContainer(fullWidth));
+
+    final PercentProvider percentProvider =
+        Provider.of<PercentProvider>(context);
+    WidgetsBinding.instance.addPostFrameCallback(
+        (_) => percentProvider.getWidthOfContainer(fullWidth));
     return Padding(
       padding: const EdgeInsets.only(top: 24),
       child: Stack(
@@ -51,14 +56,20 @@ class PercentIndicator extends StatelessWidget {
                     left: percent * percentProvider.fullWidth / 100 - 11,
                     child: Text(
                       "${percent.toInt()}%",
-                      style: TextStyle(fontSize: 9,fontWeight: FontWeight.bold,color: primaryColor),
+                      style: TextStyle(
+                          fontSize: 9,
+                          fontWeight: FontWeight.bold,
+                          color: primaryColor),
                       textAlign: TextAlign.center,
                     ),
                   ),
                   Positioned(
-                    left: 3,
+                      left: 3,
                       top: 2,
-                      child: Text(label,style: percentProvider.labelStyle,)),
+                      child: Text(
+                        label,
+                        style: percentProvider.labelStyle,
+                      )),
                 ],
               ),
             ),
@@ -81,7 +92,7 @@ class PercentIndicator extends StatelessWidget {
               playback: Playback.MIRROR,
               tween: tween,
               duration: tween.duration,
-              builder: (context, animation){
+              builder: (context, animation) {
                 return AnimatedContainer(
                     duration: Duration(milliseconds: 10),
                     decoration: BoxDecoration(

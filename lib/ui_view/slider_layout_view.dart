@@ -64,14 +64,19 @@ class _SliderLayoutViewState extends State<SliderLayoutView> {
                       child: Padding(
                         padding: EdgeInsets.only(right: 15.0, bottom: 15.0),
                         child: GestureDetector(
-                          onTap: (){
-                            Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context)=>LoginPage()));
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    LoginPage()));
                           },
                           child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 4,horizontal: 8),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 4, horizontal: 8),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(5)),
-                              border: Border.all(color: Colors.deepPurple[200],width: 1),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                              border: Border.all(
+                                  color: Colors.deepPurple[200], width: 1),
                             ),
                             child: Text(
                               Constants.NEXT,

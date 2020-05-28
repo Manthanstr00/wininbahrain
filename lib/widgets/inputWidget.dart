@@ -7,7 +7,14 @@ class InputWidget extends StatelessWidget {
   final double bottomLeft;
   final String hintText;
   final TextEditingController controller;
-  InputWidget({this.hintText,this.controller,this.topRight = 0.0, this.bottomRight = 0.0, this.topLeft = 0.0, this.bottomLeft = 0.0,});
+  InputWidget({
+    this.hintText,
+    this.controller,
+    this.topRight = 0.0,
+    this.bottomRight = 0.0,
+    this.topLeft = 0.0,
+    this.bottomLeft = 0.0,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +31,6 @@ class InputWidget extends StatelessWidget {
                   topLeft: Radius.circular(topLeft),
                   bottomRight: Radius.circular(bottomRight),
                   topRight: Radius.circular(topRight))),
-
           child: Padding(
             padding: EdgeInsets.only(left: 40, right: 20, top: 10, bottom: 10),
             child: TextField(
